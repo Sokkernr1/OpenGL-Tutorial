@@ -9,7 +9,7 @@ if(EXISTS ${CMAKE_BINARY_DIR}/conanBuild/conanbuildinfo.cmake)
     include(${CMAKE_BINARY_DIR}/conanBuild/conanbuildinfo.cmake)
     conan_basic_setup()
 else()
-    message(WARNING "The file conanbuildinfo.cmake doesn't exist, you have to run conan install first")
+    message(WARNING "The file conanbuildinfo.cmake doesn't exist, you have to run ./build.sh first")
 endif()
 
 FILE(GLOB_RECURSE SOURCE_FILES src/*.cpp)
