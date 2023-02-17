@@ -12,6 +12,8 @@
 
 #include "../shader/loadShader.h"
 
+windowManager* windowManager::m_instance = nullptr;
+
 windowManager::windowManager(char* windowTitle, int windowWidth, int windowHeight, int textureSamples)
     : m_gameWindow(nullptr)
     , m_textureSamples(textureSamples)
@@ -19,6 +21,15 @@ windowManager::windowManager(char* windowTitle, int windowWidth, int windowHeigh
     , m_windowHeight(windowHeight)
     , m_windowTitle(windowTitle)
 {
+}
+
+windowManager* windowManager::getGameWindow(char* windowTitle, int windowWidth, int windowHeight, int textureSamples)
+{
+    if ( m_instance == nullptr )
+    {
+        m_instance = new windowManager(windowTitle, windowWidth, windowHeight, textureSamples);
+    }
+    return m_instance;
 }
 
 int windowManager::startWindow()

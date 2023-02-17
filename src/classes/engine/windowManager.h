@@ -11,8 +11,12 @@
 class windowManager
 {
 public:
-    windowManager(char* windowTitle, int windowWidth, int windowHeight, int textureSamples);
-    ~windowManager(){ std::cout << "destroyed" << std::endl; };
+    static windowManager* getGameWindow(
+        char* windowTitle = nullptr,
+        int windowWidth = 1200,
+        int windowHeight = 600,
+        int textureSamples = 4
+    );
 
     int startWindow();
     void closeWindow();
@@ -25,6 +29,10 @@ public:
     void setWindowTitle(std::string title);
     void setWindowDimensions(int width, int height);
 private:
+    windowManager(char* windowTitle, int windowWidth, int windowHeight, int textureSamples);
+
+    static windowManager* m_instance;
+
     GLFWwindow* m_gameWindow;
     const int m_textureSamples;
     const char* m_windowTitle;

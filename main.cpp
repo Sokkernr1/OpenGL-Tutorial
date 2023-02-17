@@ -4,14 +4,14 @@
 
 int main()
 {
-    windowManager WindowManager = windowManager(
+    windowManager* WindowManager = windowManager::getGameWindow(
         "OpenGL learning",
         1200,
         600,
         4
     );
 
-    int exitCode = WindowManager.startWindow();
+    int exitCode = WindowManager->startWindow();
 
     std::cout << "Exited with code " + exitCode << std::endl;
 }
