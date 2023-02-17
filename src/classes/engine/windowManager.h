@@ -2,16 +2,20 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
+
 #include <GL/glew.h>
 #include <glm/vec2.hpp>
 #include <GLFW/glfw3.h>
 
-class windowManager {
+class windowManager
+{
 public:
     windowManager(char* windowTitle, int windowWidth, int windowHeight, int textureSamples);
+    ~windowManager(){ std::cout << "destroyed" << std::endl; };
 
     int startWindow();
-    void cleanup();
+    void closeWindow();
 
     GLFWwindow* getWindow() const { return m_gameWindow; };
     int getTextureSamples() const { return m_textureSamples; };

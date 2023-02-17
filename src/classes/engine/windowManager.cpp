@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <string>
+
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
@@ -217,7 +218,7 @@ int windowManager::startWindow()
                 GL_FLOAT,      // Type
                 GL_FALSE,      // Normalized?
                 0,             // Stride
-                (void*)nullptr // Array buffer offset
+                (void*)nGLFWwindowullptr // Array buffer offset
         );
 
         // Drawing the object
@@ -231,6 +232,11 @@ int windowManager::startWindow()
     while( glfwGetKey(window, GLFW_KEY_ESCAPE ) != GLFW_PRESS && glfwWindowShouldClose(window) == 0 );
 
     return 0;
+}
+
+void windowManager::closeWindow()
+{
+    glfwSetWindowShouldClose(m_gameWindow, GLFW_TRUE);
 }
 
 void windowManager::setWindowTitle(std::string title)

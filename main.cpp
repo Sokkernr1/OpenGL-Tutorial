@@ -13,5 +13,5 @@ int main()
 
     int exitCode = WindowManager.startWindow();
 
-    std::cout << exitCode << std::endl;
+    std::cout << "Exited with code " + exitCode << std::endl;
 }
