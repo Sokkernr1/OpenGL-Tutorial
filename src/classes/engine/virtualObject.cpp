@@ -42,6 +42,8 @@ virtualObject* virtualObject::newVirtualObject(
     glGenBuffers(1, &colorBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
 
+    glBufferData(GL_ARRAY_BUFFER, colorData.size() * 4, &colorData[0], GL_STATIC_DRAW);
+
     return new virtualObject(position, vertexData, colorData, shaderID, MatrixID, vertexBuffer, colorBuffer);
 }
 

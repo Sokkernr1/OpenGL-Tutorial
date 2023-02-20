@@ -137,8 +137,6 @@ void renderManager::renderUpdate()
 
     for (virtualObject* object : m_sceneObjects)
     {
-        glBufferData(GL_ARRAY_BUFFER, object->getColorData().size() * 4, &object->getColorData()[0], GL_STATIC_DRAW);
-
         // Use our shader
         glUseProgram(object->getShaderID());
 
