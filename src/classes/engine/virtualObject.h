@@ -11,14 +11,9 @@ class virtualObject
 {
 
 public:
-    virtualObject* newVirtualObject(
-        GLfloat* vertexData,
-        GLfloat* colorData = nullptr,
-        glm::vec3 position = {0, 0, 0}
-    );
-    virtualObject* newVirtualObject(
-        std::vector<GLfloat> vertexData,
-        std::vector<GLfloat> colorData = {},
+    static virtualObject* newVirtualObject(
+        std::vector<GLfloat>& vertexData,
+        std::vector<GLfloat>& colorData,
         glm::vec3 position = {0, 0, 0}
     );
     ~virtualObject(){};
@@ -27,18 +22,30 @@ public:
     void setColorData(GLfloat* colorData);
 
     const glm::vec3 getPosition() const { return m_position; };
-    const GLfloat* getVertexData() const { return m_vertexData; };
-    const GLfloat* getColorData() const { return m_colorData; };
+    const std::vector<GLfloat> getVertexData() const { return m_vertexData; };
+    const std::vector<GLfloat> getColorData() const { return m_colorData; };
+    const GLuint getShaderID() const { return m_shaderID; };
+    const GLuint getMatrixID() const { return m_matrixID; };
+    const GLuint getVertexBuffer() const { return m_vertexBuffer; };
+    const GLuint getColorBuffer() const { return m_colorBuffer; };
 
 private:
     virtualObject(
         glm::vec3 position,
-        GLfloat* vertexData,
-        GLfloat* colorData
+        std::vector<GLfloat> vertexData,
+        std::vector<GLfloat> colorData,
+        GLuint shaderID,
+        GLuint matrixID,
+        GLuint vertexBuffer,
+        GLuint colorBuffer
     );
 
     glm::vec3 m_position;
-    const GLfloat* m_vertexData;
-    GLfloat* m_colorData;
+    std::vector<GLfloat> m_vertexData;
+    std::vector<GLfloat> m_colorData;
+    const GLuint m_shaderID;
+    const GLuint m_matrixID;
+    const GLuint m_vertexBuffer;
+    const GLuint m_colorBuffer;
 
 };

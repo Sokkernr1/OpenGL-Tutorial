@@ -1,29 +1,48 @@
 #include "virtualObject.h"
+#include "../shader/loadShader.h"
 
-virtualObject::virtualObject(glm::vec3 position, GLfloat *vertexData, GLfloat *colorData)
+virtualObject::virtualObject(
+    glm::vec3 position,
+    std::vector<GLfloat> vertexData,
+    std::vector<GLfloat> colorData,
+    GLuint shaderID,
+    GLuint matrixID,
+    GLuint vertexBuffer,
+    GLuint colorBuffer
+)
     : m_position(position)
     , m_vertexData(vertexData)
     , m_colorData(colorData)
+    , m_shaderID(shaderID)
+    , m_matrixID(matrixID)
+    , m_vertexBuffer(vertexBuffer)
+    , m_colorBuffer(colorBuffer)
 {
 }
 
-virtualObject *virtualObject::newVirtualObject(
-    GLfloat *vertexData,
-    GLfloat *colorData,
+virtualObject* virtualObject::newVirtualObject(
+    std::vector<GLfloat>& vertexData,
+    std::vector<GLfloat>& colorData,
     glm::vec3 position
 )
 {
-    return new virtualObject(position, vertexData, colorData);
-}
+    GLuint shaderID = LoadShaders( "resources/shader/simpleVertexShader.vert", "resources/shader/simpleFragmentShader.frag" );
+    GLuint MatrixID = glGetUniformLocation(shaderID, "MVP");
 
-virtualObject *
-virtualObject::newVirtualObject(
-    std::vector<GLfloat> vertexData,
-    std::vector<GLfloat> colorData,
-    glm::vec3 position
-)
-{
-    return new virtualObject(position, &vertexData[0], &colorData[0]);
+    // Identify the vertex buffer
+    GLuint vertexBuffer;
+    // Generate a buffer with our identifier
+    glGenBuffers(1, &vertexBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+
+    // Give vertices to OpenGL
+    glBufferData(GL_ARRAY_BUFFER, vertexData.size() * 4, vertexData.data(), GL_STATIC_DRAW);
+
+    GLuint colorBuffer;
+    glGenBuffers(1, &colorBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
+
+    return new virtualObject(position, vertexData, colorData, shaderID, MatrixID, vertexBuffer, colorBuffer);
 }
 
 void virtualObject::setPositon(glm::vec3 position)

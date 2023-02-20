@@ -73,69 +73,6 @@ int windowManager::startWindow()
     do
     {
         RenderManager->renderUpdate();
-        /*
-        double currentTime = glfwGetTime();
-        totalFrames++;
-        if ( currentTime - lastTime >= 1.0 )
-        {
-            std::cout << "FPS: " + std::to_string(1000.0 / double(totalFrames)) + "\n";
-            totalFrames = 0;
-            lastTime += 1.0;
-        }
-
-        if ( g_color_buffer_data[3*0+2] >= 1 && colorChangeValue > 0.0f )
-        {
-            colorChangeValue = -0.01f;
-        }
-        else if ( g_color_buffer_data[3*0+2] <= 0 && colorChangeValue < 0.0f )
-        {
-            colorChangeValue = 0.01f;
-        }
-
-        for (int v = 0; v < 12*3 ; v++)
-        {
-            g_color_buffer_data[3 * v + 0] = g_color_buffer_data[3 * v + 0] + colorChangeValue;
-            g_color_buffer_data[3 * v + 1] = g_color_buffer_data[3 * v + 1] + colorChangeValue;
-            g_color_buffer_data[3 * v + 2] = g_color_buffer_data[3 * v + 2] + colorChangeValue;
-        }
-
-        glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
-
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //Clear the screen
-
-        // Use our shader
-        glUseProgram(programID);
-
-        // Send our transformation to the currently bound shader, in the "MVP" uniform
-        // This is done in the main loop since each model will have a different MVP matrix (At least for the M part)
-        glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &mvp[0][0]);
-
-        glEnableVertexAttribArray(0);
-        glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-        glVertexAttribPointer(
-                0,             // No particular reason for 0, but must match the layout in the shader
-                3,             // Size
-                GL_FLOAT,      // Type
-                GL_FALSE,      // Normalized?
-                0,             // Stride
-                (void*)nullptr // Array buffer offset
-        );
-
-        glEnableVertexAttribArray(1);
-        glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
-        glVertexAttribPointer(
-                1,             // No particular reason for 0, but must match the layout in the shader
-                3,             // Size
-                GL_FLOAT,      // Type
-                GL_FALSE,      // Normalized?
-                0,             // Stride
-                (void*)nGLFWwindowullptr // Array buffer offset
-        );
-
-        // Drawing the object
-        glDrawArrays(GL_TRIANGLES, 0, sizeof(g_vertex_buffer_data) / 3); // Start at vertex 0 -> 3 Vertices -> 1 Triangle
-        glDisableVertexAttribArray(0);
-         */
 
         glfwSwapBuffers(window);
         glfwPollEvents();
